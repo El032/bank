@@ -1,16 +1,55 @@
 spring:
+  datasource:
+    url: jdbc:tc:postgresql:16:///bank_test
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+  flyway:
+    enabled: true
+
   kafka:
     bootstrap-servers: localhost:9092
 
   mail:
     host: localhost
+    port: 2525
+    username: test
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: false
+          ssl:
+            enable: false
 
 bank:
+  notification:
+    email: test@example.com
+
   jwt:
-    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    secret: 0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
     expiration-ms: 86400000
 
   kafka:
     topics:
       transfer-completed: transfer-completed
       account-created: account-created
+
+# Тестовые значения переменных, которые используются напрямую через ${...}
+MAIL_HOST: localhost
+MAIL_PORT: 2525
+MAIL_USERNAME: test
+MAIL_PASSWORD: test
+
+BANK_NOTIFICATION_EMAIL: test@example.com
+
+BANK_JWT_SECRET: 0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
+
+CVV_ENCRYPTION_KEY: 0123456789ABCDEF0123456789ABCDEF
+
+cvv:
+  encryption-key: 0123456789ABCDEF0123456789ABCDEF
