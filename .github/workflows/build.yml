@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      CVV_ENCRYPTION_KEY: 0123456789ABCDEF0123456789ABCDEF
-      TEST_JWT_SECRET: 0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
+      CVV_ENCRYPTION_KEY: ${{ secrets.CVV_ENCRYPTION_KEY }}
+      TEST_JWT_SECRET: ${{ secrets.TEST_JWT_SECRET }}
 
       BANK_NOTIFICATION_EMAIL: test@example.com
 
@@ -38,8 +38,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Get Java version
-        run: java -version
+
 
 
       - name: Build with Maven
