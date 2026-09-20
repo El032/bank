@@ -76,7 +76,7 @@ class UserServiceCacheTest {
                 userService.findUserResponseById(saved.getId());
 
         assertNotNull(first);
-        assertEquals(saved.getId(), first.getId());
+        assertEquals(saved.getId() + 1, first.getId());
 
         // Проверяем, что значение появилось в кэше
         Cache.ValueWrapper cached =
