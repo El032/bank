@@ -10,12 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
-
+@ActiveProfiles("test")
 @SpringBootTest
 @Import(TestcontainersConfig.class)
 class UserServiceCacheTest {

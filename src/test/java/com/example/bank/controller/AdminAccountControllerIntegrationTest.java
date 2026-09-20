@@ -1,14 +1,14 @@
 package com.example.bank.controller;
 
-import com.example.bank.model.AccountStatus;
+
+import com.example.bank.config.TestcontainersConfig;
 import com.example.bank.model.BankAccount;
 import com.example.bank.model.User;
 import com.example.bank.repository.AccountRepository;
 import com.example.bank.repository.UserRepository;
 import com.example.bank.security.JwtService;
-import com.example.bank.dto.UpdateAccountStatusRequest;
-import com.example.bank.repository.TransactionRepository;
-import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,8 @@ import java.math.BigDecimal;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+@ActiveProfiles("test")
+@Import(TestcontainersConfig.class)
 @SpringBootTest
 class AdminAccountControllerIntegrationTest {
 
@@ -82,7 +83,16 @@ class AdminAccountControllerIntegrationTest {
 
         User admin =
                 userRepository.findByUserName("admin")
-                        .orElseThrow();
+                        .orElseGet(() ->
+                                userRepository.save(
+                                        new User(
+                                                "admin",
+                                                "admin@test.local",
+                                                "Admin",
+                                                "test"
+                                        )
+                                )
+                        );
 
 
         admin.setRole("ADMIN");
@@ -100,7 +110,16 @@ class AdminAccountControllerIntegrationTest {
 
         User user =
                 userRepository.findByUserName("user")
-                        .orElseThrow();
+                        .orElseGet(() ->
+                                userRepository.save(
+                                        new User(
+                                                "user",
+                                                "user@test.local",
+                                                "User",
+                                                "test"
+                                        )
+                                )
+                        );
 
 
         userToken =

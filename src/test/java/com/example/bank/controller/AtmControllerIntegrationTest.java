@@ -1,5 +1,6 @@
 package com.example.bank.controller;
 
+import com.example.bank.config.TestcontainersConfig;
 import com.example.bank.model.BankAccount;
 import com.example.bank.model.BankCard;
 import com.example.bank.model.User;
@@ -13,8 +14,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -27,7 +30,8 @@ import java.time.LocalDate;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+@ActiveProfiles("test")
+@Import(TestcontainersConfig.class)
 @SpringBootTest
 class AtmControllerIntegrationTest {
 
@@ -78,7 +82,16 @@ class AtmControllerIntegrationTest {
 
         User user =
                 userRepository.findByUserName("user")
-                        .orElseThrow();
+                        .orElseGet(() ->
+                                userRepository.save(
+                                        new User(
+                                                "user",
+                                                "user@test.local",
+                                                "User",
+                                                "test"
+                                        )
+                                )
+                        );
 
 
         userToken =

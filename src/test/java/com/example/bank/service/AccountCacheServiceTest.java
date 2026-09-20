@@ -2,7 +2,6 @@ package com.example.bank.service;
 
 import com.example.bank.model.BankAccount;
 import com.example.bank.repository.AccountRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

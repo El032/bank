@@ -5,8 +5,6 @@ import com.example.bank.model.BankAccount;
 import com.example.bank.model.User;
 import com.example.bank.repository.*;
 import com.example.bank.security.JwtService;
-import com.example.bank.service.TransferService;
-import com.example.bank.service.UserService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

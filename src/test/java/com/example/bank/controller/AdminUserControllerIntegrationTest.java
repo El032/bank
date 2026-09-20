@@ -1,17 +1,18 @@
 package com.example.bank.controller;
 
+import com.example.bank.config.TestcontainersConfig;
 import com.example.bank.model.User;
 import com.example.bank.repository.UserRepository;
 import com.example.bank.security.JwtService;
-import com.example.bank.dto.UpdateUserStatusRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -22,6 +23,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
+@ActiveProfiles("test")
+@Import(TestcontainersConfig.class)
 @SpringBootTest
 class AdminUserControllerIntegrationTest {
 
@@ -68,7 +72,16 @@ class AdminUserControllerIntegrationTest {
 
         User admin =
                 userRepository.findByUserName("admin")
-                        .orElseThrow();
+                        .orElseGet(() ->
+                                userRepository.save(
+                                        new User(
+                                                "admin",
+                                                "admin@test.local",
+                                                "Admin",
+                                                "test"
+                                        )
+                                )
+                        );
 
 
         admin.setRole("ADMIN");
@@ -86,7 +99,16 @@ class AdminUserControllerIntegrationTest {
 
         User user =
                 userRepository.findByUserName("user")
-                        .orElseThrow();
+                        .orElseGet(() ->
+                                userRepository.save(
+                                        new User(
+                                                "user",
+                                                "user@test.local",
+                                                "User",
+                                                "test"
+                                        )
+                                )
+                        );
 
 
 

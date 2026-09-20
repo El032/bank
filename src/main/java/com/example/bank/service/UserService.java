@@ -11,7 +11,6 @@ import com.example.bank.model.*;
 import com.example.bank.repository.AccountRepository;
 import com.example.bank.repository.UserRepository;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

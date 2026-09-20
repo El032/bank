@@ -8,7 +8,6 @@ import com.example.bank.exception.AtmSessionNotActiveException;
 import com.example.bank.exception.CardNotFoundException;
 import com.example.bank.exception.InactiveCardException;
 import com.example.bank.exception.InvalidPinException;
-import com.example.bank.model.AccountStatus;
 import com.example.bank.model.AtmSession;
 import com.example.bank.model.BankAccount;
 import com.example.bank.model.BankCard;

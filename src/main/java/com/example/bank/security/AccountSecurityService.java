@@ -1,6 +1,6 @@
 package com.example.bank.security;
 
-import com.example.bank.model.BankAccount;
+
 import com.example.bank.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 

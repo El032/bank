@@ -1,7 +1,6 @@
 package com.example.bank.model;
 
 import com.example.bank.exception.CreditLimitExceededException;
-import com.example.bank.exception.InsufficientFundsException;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 

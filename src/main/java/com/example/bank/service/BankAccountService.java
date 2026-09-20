@@ -2,11 +2,9 @@ package com.example.bank.service;
 
 import com.example.bank.actuator.AccountMetrics;
 import com.example.bank.dto.StatementResponse;
-import com.example.bank.event.AccountCreatedEvent;
 import com.example.bank.event.BankEventPublisher;
 import com.example.bank.exception.AccountNotFoundException;
 import com.example.bank.exception.InactiveAccountException;
-import com.example.bank.exception.ResourceConflictException;
 import com.example.bank.exception.UserInactiveException;
 import com.example.bank.model.*;
 import com.example.bank.repository.AccountRepository;
