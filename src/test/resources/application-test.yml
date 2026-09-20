@@ -1,0 +1,16 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+
+  mail:
+    host: localhost
+
+bank:
+  jwt:
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration-ms: 86400000
+
+  kafka:
+    topics:
+      transfer-completed: transfer-completed
+      account-created: account-created

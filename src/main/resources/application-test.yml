@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    # Специальный URL — Testcontainers сам подставит реальный порт
+    url: jdbc:tc:postgresql:16:///bank_test
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  flyway:
+    enabled: true
+
+bank:
+
+  jwt:
+    secret: ${TEST_JWT_SECRET}
+    expiration-ms: ${BANK_JWT_EXPIRATION_MS:86400000}
+
+cvv:
+  encryption-key: ${CVV_ENCRYPTION_KEY:0123456789ABCDEF0123456789ABCDEF}

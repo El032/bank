@@ -1,0 +1,127 @@
+# =========================
+# General / Maven
+# =========================
+HELP.md
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+.mvn/wrapper/maven-wrapper.jar
+
+# Preserve nested target directories
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# =========================
+# Eclipse / STS
+# =========================
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# =========================
+# NetBeans
+# =========================
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# =========================
+# Build tools
+# =========================
+build/
+.gradle/
+
+# Preserve nested build directories
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+hs_err_pid*
+replay_pid*
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Local Spring configuration
+# =========================
+application-local.yml
+application-secret.yml
+application-prod-secret.yml
+
+# =========================
+# Docker
+# =========================
+*.tar
+*.tar.gz
+docker-compose.override.yml
+
+# =========================
+# Kubernetes secrets
+# =========================
+k8s/secret.yaml
+k8s/*secret*.yaml
+
+# =========================
+# Maven generated files
+# =========================
+effective-pom.xml
+
+# =========================
+# Test reports
+# =========================
+surefire-reports/
+failsafe-reports/
+
+# =========================
+# JaCoCo
+# =========================
+jacoco.exec
+jacoco/
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db

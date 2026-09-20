@@ -1,0 +1,2 @@
+ALTER TABLE atm_sessions
+    ADD COLUMN card_returned BOOLEAN NOT NULL DEFAULT FALSE;

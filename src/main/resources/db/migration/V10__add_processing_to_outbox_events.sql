@@ -1,0 +1,2 @@
+ALTER TABLE outbox_events
+    ADD COLUMN processing BOOLEAN NOT NULL DEFAULT FALSE;

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bank-config
+  namespace: default
+
+data:
+  SPRING_PROFILES_ACTIVE: "prod"
+
+  BANK_MAX_ACCOUNTS: "10000"
+  BANK_FEE_PERCENT: "0.5"
+  BANK_JWT_EXPIRATION_MS: "86400000"
+
+  DATABASE_URL: "jdbc:postgresql://postgres-service:5432/bank"
+
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka-service:9092"
+
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+
+  MAIL_HOST: "smtp.mail.ru"
+  MAIL_PORT: "465"

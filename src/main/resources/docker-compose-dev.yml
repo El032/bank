@@ -1,0 +1,21 @@
+# Этот файл ДОПОЛНЯЕТ docker-compose.yml для dev-окружения
+# Запуск: docker compose -f docker-compose.yml -f docker-compose-dev.yml up
+
+
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"   # открываем порт для прямого подключения из IDE
+
+  app:
+    build:
+      context: ../../../
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      JAVA_OPTS: "-Xmx256m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    ports:
+      - "8080:8080"
+      - "5005:5005"   # порт для удалённой отладки (remote debug)
+    volumes:
+      - ./logs:/app/logs  # монтируем папку для логов

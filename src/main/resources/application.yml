@@ -1,0 +1,70 @@
+server:
+  port: 8080
+
+spring:
+  config:
+      import: "optional:file:.env[.properties]"
+  application:
+    name: bank
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+bank:
+  jwt:
+    secret: ${BANK_JWT_SECRET}
+    expiration-ms: ${BANK_JWT_EXPIRATION_MS:86400000}  # 24 часа в миллисекундах
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    try-it-out-enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+  show-actuator: false
+
+cvv:
+  encryption-key: ${CVV_ENCRYPTION_KEY}
+
+
+# ============================================================
+# Spring Boot Actuator
+# ============================================================
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,loggers,env,threaddump,prometheus
+      base-path: /actuator
+
+  endpoint:
+    health:
+      show-details: when-authorized
+
+    loggers:
+      enabled: true
+
+  info:
+    env:
+      enabled: true
+    build:
+      enabled: true
+    git:
+      enabled: true
+
+
+# ============================================================
+# Информация для /actuator/info
+# ============================================================
+
+info:
+  app:
+    name: "Bank API"
+    version: "1.0.0"
+    description: "REST API банковского приложения"
+
+  java:
+    version: "${java.version}"

@@ -1,0 +1,2 @@
+ALTER TABLE atm_sessions
+    ADD COLUMN pin_verified BOOLEAN NOT NULL DEFAULT FALSE;
