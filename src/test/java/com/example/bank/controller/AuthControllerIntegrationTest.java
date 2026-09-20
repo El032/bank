@@ -1,6 +1,8 @@
 package com.example.bank.controller;
 
 import com.example.bank.config.TestcontainersConfig;
+import com.example.bank.repository.AccountRepository;
+import com.example.bank.repository.TransferRepository;
 import com.example.bank.repository.UserRepository;
 import com.example.bank.security.JwtService;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,9 +35,17 @@ class AuthControllerIntegrationTest {
     @Autowired
     JwtService jwtService;
 
+    @Autowired
+    TransferRepository transferRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
+
 
     @BeforeEach
     void setUp() {
+        transferRepository.deleteAll();
+        accountRepository.deleteAll();
         userRepository.deleteAll();
     }
 

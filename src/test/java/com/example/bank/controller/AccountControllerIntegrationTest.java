@@ -5,6 +5,7 @@ import com.example.bank.model.BankAccount;
 import com.example.bank.model.User;
 import com.example.bank.repository.AccountRepository;
 import com.example.bank.repository.BankCardRepository;
+import com.example.bank.repository.TransferRepository;
 import com.example.bank.repository.UserRepository;
 import com.example.bank.security.JwtService;
 import com.example.bank.service.BankAccountService;
@@ -39,15 +40,18 @@ class AccountControllerIntegrationTest {
     @Autowired PasswordEncoder passwordEncoder;
     @Autowired BankCardRepository bankCardRepository;
     @Autowired BankCardService bankCardService;
+    @Autowired TransferRepository transferRepository;
 
     private String adminToken;
     private String userToken;
 
     @BeforeEach
     void setUp() {
-              bankCardRepository.deleteAll();
-              accountRepository.deleteAll();
-              userRepository.deleteAll();
+
+        transferRepository.deleteAll();
+        bankCardRepository.deleteAll();
+        accountRepository.deleteAll();
+        userRepository.deleteAll();
 
               User admin = new User(
                       "admin",
