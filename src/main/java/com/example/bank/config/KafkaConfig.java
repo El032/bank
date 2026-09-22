@@ -13,6 +13,7 @@ import org.springframework.kafka.config.*;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.core.KafkaAdmin;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 
 import java.util.HashMap;
@@ -24,12 +25,23 @@ public class KafkaConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
+//добавил ниже если что удалить private final KafkaProperties kafkaProperties;
+//
+//public KafkaConfig(KafkaProperties kafkaProperties) {
+//    this.kafkaProperties = kafkaProperties;
+//}
+    private final KafkaProperties kafkaProperties;
+
+    public KafkaConfig(KafkaProperties kafkaProperties) {
+        this.kafkaProperties = kafkaProperties;
+    }
 
     // Создаём топики при старте приложения
     @Bean
     public NewTopic transferCompletedTopic() {
         return TopicBuilder.name("bank.transfer.completed")
-                .partitions(3)    // 3 партиции для параллельности
+                //.partitions(3)    // 3 партиции для параллельности
+                .partitions(2)
                 .replicas(1)      // 1 реплика (достаточно для dev)
                 .build();
     }
@@ -50,10 +62,18 @@ public class KafkaConfig {
                 .build();
     }
 
+//    @Bean
+//    public KafkaAdmin kafkaAdmin() {
+//        Map<String, Object> configs = new HashMap<>();
+//        configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+//        return new KafkaAdmin(configs);
+//    }
+// если не заработает вернуть верхний кафка админ
     @Bean
     public KafkaAdmin kafkaAdmin() {
-        Map<String, Object> configs = new HashMap<>();
-        configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        Map<String, Object> configs = new HashMap<>(
+                kafkaProperties.buildAdminProperties(null)
+        );
         return new KafkaAdmin(configs);
     }
 
@@ -61,14 +81,21 @@ public class KafkaConfig {
     @Bean
     public ConsumerFactory<String, TransferCompletedEvent>
     transferConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "bank-notification-group");
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+//        Map<String, Object> props = new HashMap<>();
+//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+//        props.put(ConsumerConfig.GROUP_ID_CONFIG, "bank-notification-group");
+//        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+
+        // если не пройдет удалить Map<String, Object> props = new HashMap<>(
+        //        kafkaProperties.buildConsumerProperties()
+        //); и раскоментировать что выше
+        Map<String, Object> props = new HashMap<>(
+                kafkaProperties.buildConsumerProperties()
+        );
 
         JsonDeserializer<TransferCompletedEvent> deserializer =
                 new JsonDeserializer<>(TransferCompletedEvent.class);
-        deserializer.addTrustedPackages("com.example.bank.event");
+        //deserializer.addTrustedPackages("com.example.bank.event");
 
         return new DefaultKafkaConsumerFactory<>(
                 props, new StringDeserializer(), deserializer);
