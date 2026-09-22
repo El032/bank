@@ -43,3 +43,7 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean test
+
+      - name: Deploy to Render
+        if: success()
+        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
