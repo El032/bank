@@ -125,3 +125,6 @@ jacoco/
 # =========================
 .DS_Store
 Thumbs.db
+
+aiven-ca.pem
+aiven-truststore.p12
