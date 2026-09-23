@@ -519,6 +519,7 @@ public class AccountController {
                 transaction.getId(),
                 transaction.getAmount(),
                 transaction.getType(),
+                transaction.getSource(),
                 transaction.getCreatedAt()
         );
     }

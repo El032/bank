@@ -1,5 +1,6 @@
 package com.example.bank.dto;
 
+import com.example.bank.model.TransactionSource;
 import com.example.bank.model.TransactionType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -37,15 +38,23 @@ public class TransactionResponse {
     )
     private LocalDateTime createdAt;
 
+    @Schema(
+            description = "Источник транзакции",
+            example = "ATM"
+    )
+    private TransactionSource source;
+
     public TransactionResponse(
             Long id,
             BigDecimal amount,
             TransactionType type,
+            TransactionSource source,
             LocalDateTime createdAt
     ) {
         this.id = id;
         this.amount = amount;
         this.type = type;
+        this.source = source;
         this.createdAt = createdAt;
     }
 
@@ -66,4 +75,6 @@ public class TransactionResponse {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+    public TransactionSource getSource() { return source; }
 }
