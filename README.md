@@ -1120,13 +1120,6 @@ mvn spring-boot:run
 * CI/CD;
 * production deployment.
 
----
-
-# 👨‍💻 Автор
-
-**Эльдар — Java Backend Developer**
-
-Проект разработан как практическая реализация backend-разработки на Java и Spring с постепенным развитием от базового REST API до production-oriented backend-приложения.
 
 ---
 
